@@ -1,24 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import LeftTab from './LeftTab';
+import RightTab from './RightTab';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main class="m-3 p-3 d-flex justify-content-center align-items-center h-100">
+      <div class="container-fluid">
+        <div class="row h-100">
+          <LeftTab />
+          <RightTab />
+        </div>
+      </div>
+    </main>
   );
 }
 
