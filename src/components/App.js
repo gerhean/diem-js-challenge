@@ -14,8 +14,8 @@ class App extends React.Component {
       // 0 for untouched, 1 for entering, 2 for valid, 3 for invalid
       enterAgeStage: 0,
       age: -1,
-      // -1 for default, 0 for light, 1 for dark
-      mode: -1,
+      // '' for default, "light", "dark"
+      mode: '',
       skills: ["HTML", "CSS", "JavaScript"],
       addedSkills: [false, false, false],
     };
@@ -34,7 +34,16 @@ class App extends React.Component {
               skills={this.state.skills}
               addedSkills={this.state.addedSkills}
             />
-            <RightTab />
+            <RightTab 
+              removeSkill={this.removeSkill}
+              enterNameStage={this.state.enterNameStage}
+              name={this.state.name}
+              enterAgeStage={this.state.enterAgeStage}
+              age={this.state.age}
+              mode={this.state.mode}
+              skills={this.state.skills}
+              addedSkills={this.state.addedSkills}
+            />
           </div>
         </div>
       </main>

@@ -1,5 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import SkillButton from './SkillButton';
+
+
+function emptySubmit(e) {
+  e.preventDefault();
+}
 
 class LeftTab extends React.Component {
   constructor(props) {
@@ -11,11 +17,24 @@ class LeftTab extends React.Component {
   }
 
   render() {
+    const skillButtons = this.props.skills.map((name, index) => {
+        return !this.props.addedSkills[index] ?
+          <SkillButton 
+            key={name}
+            index={index}
+            name={name}
+            toggleButton={this.props.addSkill}
+            isInRightTab={false}
+          />
+        :
+          null
+      }
+    );
     return (
       <div className="col-12 col-sm-12 col-md-6">
         <div className="panel bg-light">
           <div className="panel-body p-3">
-            <form action="#">
+            <form action="#" onSubmit={emptySubmit}>
               {/*Name*/}
               <div className="form-group">
                 <label className="control-label">
@@ -52,15 +71,23 @@ class LeftTab extends React.Component {
                 <div className="form-check form-check-inline">
                   <input 
                     className="form-check-input" 
-                    type="radio" name="modeOptions"
+                    type="radio" 
+                    name="modeOptions"
                     id="light"
-                    value="Light"
-                    onClick="onClickLightMode"
+                    value="light"
+                    onClick={this.onClickModeOptions}
                   />
                   <label className="form-check-label">Light Mode</label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="radio" name="modeOptions" id="dark" value="Dark"/>
+                  <input 
+                    className="form-check-input"
+                    type="radio"
+                    name="modeOptions"
+                    id="dark"
+                    value="dark"
+                    onClick={this.onClickModeOptions}
+                    />
                   <label className="form-check-label">Dark Mode</label>
                 </div>
               </div>
@@ -69,9 +96,7 @@ class LeftTab extends React.Component {
                 <label className="control-label mr-3">
                   Skills:
                 </label>
-                <button type="button" className="btn btn-success btn-sm" id="html">HTML</button>
-                <button type="button" className="btn btn-success btn-sm" id="css">CSS</button>
-                <button type="button" className="btn btn-success btn-sm" id="javascript">JavaScript</button>
+                {skillButtons}
               </div>
             </form>
           </div>
@@ -101,7 +126,7 @@ class LeftTab extends React.Component {
 
   onBlurBirthday = (e) => {
     const birthDate = new Date(e.target.value);
-    if (birthDate instanceof Date && !isNaN(birthDate)) {
+    if (isNaN(birthDate)) {
       this.props.updateAge(-1, 3);
       return;
     }
@@ -114,8 +139,8 @@ class LeftTab extends React.Component {
     this.props.updateAge(-1, 2);
   }
 
-  onClickLightMode = (e) => {
-
+  onClickModeOptions = (e) => {
+    this.props.updateMode(e.target.value);
   }
 }
 
