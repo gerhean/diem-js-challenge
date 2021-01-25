@@ -1,7 +1,15 @@
 import React from 'react';
-import './LeftTab.scss';
+import PropTypes from 'prop-types';
 
 class LeftTab extends React.Component {
+	constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      age: -1,
+    };
+  }
+
   render() {
   	return (
 	    <div className="col-12 col-sm-12 col-md-6">
@@ -13,14 +21,28 @@ class LeftTab extends React.Component {
 	              <label className="control-label">
 	                Name:
 	              </label>
-	              <input className="form-control" type="text" id="name" name="name" />
+	              <input 
+	              	className="form-control" 
+	              	type="text" 
+	              	id="name" 
+	              	name="name"
+	              	onFocus={this.onFocusName}
+	              	onBlur={this.onBlurName}
+	              />
 	            </div>
 	            {/*Birthday*/}
 	            <div className="form-group">
 	              <label className="control-label">
 	                Birthday:
 	              </label>
-	              <input className="form-control" id="date" name="date" type="date"/>
+	              <input 
+	              	className="form-control"
+	              	id="date"
+	              	name="date"
+	              	type="date"
+	              	onFocus={this.onFocusName}
+	              	onBlur={this.onBlurName}
+	              />
 	            </div>
 	            {/*Choose Theme*/}
 	            <div className="form-group">
@@ -51,6 +73,41 @@ class LeftTab extends React.Component {
 	    </div>
 	  );
   }
+
+  onFocusName = (e) => {
+    const name = e.target.value;
+    if (name === '') {
+    	this.props.updateName('', 1)
+    }
+  }
+
+  onBlurName = (e) => {
+    const name = e.target.value;
+    this.props.updateName(name, 2)
+  }
+
+  onFocusBirthday = (e) => {
+    const birthdayStr = e.target.value;
+    if (birthdayStr === '') {
+    	this.props.updateAge(-1, 1)
+    }
+  }
+
+  onBlurBirthday = (e) => {
+    const birthDate = new Date(e.target.value);
+  //   const now = new Date();
+		// const curYear = now.getFullYear();
+    console.log(birthDate);
+  }
 }
+
+LeftTab.propTypes = {
+  updateName: PropTypes.func,
+  updateAge: PropTypes.func,
+  updateMode: PropTypes.func,
+  addSkill: PropTypes.func,
+  skills: PropTypes.array,
+  addedSkills: PropTypes.array,
+};
 
 export default LeftTab;
