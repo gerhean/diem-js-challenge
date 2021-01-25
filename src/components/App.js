@@ -14,8 +14,8 @@ class App extends React.Component {
       // 0 for untouched, 1 for entering, 2 for valid, 3 for invalid
       enterAgeStage: 0,
       age: -1,
-      // 0 for light, 1 for dark
-      mode: 0,
+      // -1 for default, 0 for light, 1 for dark
+      mode: -1,
       skills: ["HTML", "CSS", "JavaScript"],
       addedSkills: [false, false, false],
     };
