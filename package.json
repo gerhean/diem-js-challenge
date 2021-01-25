@@ -1,5 +1,6 @@
 {
   "name": "diem-js-challenge",
+  "homepage": "http://gerhean.github.io/diem-js-challenge",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
