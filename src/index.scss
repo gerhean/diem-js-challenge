@@ -1,0 +1,18 @@
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
+@import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+.btn {
+  margin: 0 3px;
+}
+
+
+.right-button {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+  &:hover {
+	  color: #fff;
+		background-color: #dc3545;
+		border-color: #dc3545;
+	}
+}
