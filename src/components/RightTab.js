@@ -49,18 +49,14 @@ class RightTab extends React.Component {
     const themeClass = this.props.mode === "dark" ? "bg-dark text-white" : "bg-light text-dark";
 
     // Skills
-    const skillButtons = this.props.skills.map((name, index) => {
-        return this.props.addedSkills[index] ?
-          <SkillButton 
-            key={name}
-            index={index}
-            name={name}
-            toggleButton={this.props.removeSkill}
-            isInRightTab={true}
-          />
-        :
-          null
-      }
+    const skillButtons = this.props.addedSkillsOrder.map((skillIndex) => 
+      <SkillButton 
+        key={skillIndex}
+        index={skillIndex}
+        name={this.props.skills[skillIndex]}
+        toggleButton={this.props.removeSkill}
+        isInRightTab={true}
+      />
     );
 
     return (
@@ -96,7 +92,7 @@ RightTab.propTypes = {
   age: PropTypes.number,
   mode: PropTypes.string,
   skills: PropTypes.array,
-  addedSkills: PropTypes.array,
+  addedSkillsOrder: PropTypes.array,
 };
 
 export default RightTab;

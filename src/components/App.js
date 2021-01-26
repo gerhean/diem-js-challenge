@@ -18,6 +18,7 @@ class App extends React.Component {
       mode: '',
       skills: ["HTML", "CSS", "JavaScript"],
       addedSkills: [false, false, false],
+      addedSkillsOrder: [],
     };
   }
 
@@ -42,7 +43,7 @@ class App extends React.Component {
               age={this.state.age}
               mode={this.state.mode}
               skills={this.state.skills}
-              addedSkills={this.state.addedSkills}
+              addedSkillsOrder={this.state.addedSkillsOrder}
             />
           </div>
         </div>
@@ -74,8 +75,11 @@ class App extends React.Component {
     //copy the array
     const newAddedSkills = this.state.addedSkills.slice();
     newAddedSkills[index] = true;
+    const newAddedSkillsOrder = this.state.addedSkillsOrder.slice();
+    newAddedSkillsOrder.push(index);
     this.setState({
-      addedSkills: newAddedSkills
+      addedSkills: newAddedSkills,
+      addedSkillsOrder: newAddedSkillsOrder,
     });
   }
 
@@ -83,8 +87,10 @@ class App extends React.Component {
     //copy the array
     const newAddedSkills = this.state.addedSkills.slice();
     newAddedSkills[index] = false;
+    const newAddedSkillsOrder = this.state.addedSkillsOrder.filter(e => e !== index)
     this.setState({
-      addedSkills: newAddedSkills
+      addedSkills: newAddedSkills,
+      addedSkillsOrder: newAddedSkillsOrder,
     });
   }
 }

@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import React from 'react';
 import PropTypes from 'prop-types';
 import SkillButton from './SkillButton';
@@ -69,26 +70,30 @@ class LeftTab extends React.Component {
                   Choose Theme:
                 </label>
                 <div className="form-check form-check-inline">
-                  <input 
-                    className="form-check-input" 
-                    type="radio" 
-                    name="modeOptions"
-                    id="light"
-                    value="light"
-                    onClick={this.onClickModeOptions}
-                  />
-                  <label className="form-check-label">Light Mode</label>
+                  <label className="form-check-label">
+                    <input 
+                      className="form-check-input" 
+                      type="radio" 
+                      name="modeOptions"
+                      id="light"
+                      value="light"
+                      onClick={this.onClickModeOptions}
+                    />
+                    Light Mode
+                  </label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input 
-                    className="form-check-input"
-                    type="radio"
-                    name="modeOptions"
-                    id="dark"
-                    value="dark"
-                    onClick={this.onClickModeOptions}
+                  <label className="form-check-label">
+                    <input 
+                      className="form-check-input"
+                      type="radio"
+                      name="modeOptions"
+                      id="dark"
+                      value="dark"
+                      onClick={this.onClickModeOptions}
                     />
-                  <label className="form-check-label">Dark Mode</label>
+                    Dark Mode
+                  </label>
                 </div>
               </div>
               {/*Skills*/}
@@ -125,15 +130,14 @@ class LeftTab extends React.Component {
   }
 
   onBlurBirthday = (e) => {
-    const birthDate = new Date(e.target.value);
-    if (isNaN(birthDate)) {
+    const birthDate = DateTime.fromISO(e.target.value);
+    if (!birthDate.isValid) {
       this.props.updateAge(-1, 3);
       return;
     }
-    const now = new Date();
-    const age = now.getTime() - birthDate.getTime();
-    if (age > 0) {
-      this.props.updateAge(now.getFullYear() - birthDate.getFullYear(), 2);
+    const age = birthDate.diffNow(["years", "days"])
+    if (age.days < 0) {
+      this.props.updateAge(-age.years, 2);
       return;
     }
     this.props.updateAge(-1, 2);
